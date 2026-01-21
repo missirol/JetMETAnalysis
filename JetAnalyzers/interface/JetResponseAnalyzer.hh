@@ -15,7 +15,6 @@
 #include "JetMETAnalysis/JetUtilities/interface/JRAEvent.h"
 
 #include "FWCore/Framework/interface/Frameworkfwd.h"
-#include "FWCore/Framework/interface/EDAnalyzer.h"
 #include "FWCore/Framework/interface/one/EDAnalyzer.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
@@ -40,7 +39,7 @@
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "DataFormats/TrackReco/interface/TrackFwd.h"
 
-#include "JetMETCorrections/Objects/interface/JetCorrector.h"
+#include "JetMETCorrections/JetCorrector/interface/JetCorrector.h"
 
 #include "DataFormats/JetMatching/interface/JetMatchedPartons.h"
 #include "SimDataFormats/GeneratorProducts/interface/GenEventInfoProduct.h"
@@ -106,8 +105,7 @@ private:
   edm::EDGetTokenT<PFCandidateView> srcPFCandidates_;
   edm::EDGetTokenT<std::vector<edm::FwdPtr<reco::PFCandidate> > > srcPFCandidatesAsFwdPtr_;
   edm::EDGetTokenT<vector<reco::GenParticle> > srcGenParticles_;
-
-  std::string   jecLabel_;
+  edm::EDGetTokenT<reco::JetCorrector> jetCorrectorToken_;
 
   bool          doComposition_;
   bool          doFlavor_;
@@ -129,8 +127,6 @@ private:
   bool          isTrackJet_;
   bool          isTauJet_;
 
-  const JetCorrector* jetCorrector_;
-  
   // tree & branches
   TTree*        tree_;
   JRAEvent* 	JRAEvt_;
